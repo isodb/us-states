@@ -1,13 +1,15 @@
 import { states } from './data/us-states';
 import type { USState } from './types';
 
+type Indexes = {
+  code?: ReadonlyMap< USState[ 'code' ], USState >;
+  name?: ReadonlyMap< USState[ 'name' ], USState >;
+  fips?: ReadonlyMap< USState[ 'fips' ], USState >;
+};
+
 export class Lookup {
   private readonly states: ReadonlyArray< USState >;
-  private readonly indexes = {
-    code: [],
-    name: [],
-    fips: []
-  } as const;
+  private readonly indexes: Indexes = {};
 
   constructor ( states: ReadonlyArray< USState > ) {
     this.states = states;
