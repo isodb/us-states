@@ -38,7 +38,9 @@ export class Lookup {
 
   public filter () : ReadonlyArray< USState > {}
 
-  public find ( by: 'code' | 'name' | 'fips', key: string ) : USState | undefined {}
+  public find ( by: 'code' | 'name' | 'fips', key: string ) : USState | undefined {
+    return this.states.find( state => state[ by ].toLowerCase() === key.toLowerCase() );
+  }
 
   public byCode ( code: string ) : USState | undefined {
     return this.find( 'code', code );
