@@ -26,6 +26,18 @@ export class Lookup {
   public filter ( predicate: ( state: USState ) => boolean ) : ReadonlyArray< USState > {
     return this.states.filter( predicate );
   }
+
+  public byCode ( code: USState[ 'code' ] ) : USState | undefined {
+    return this.get( 'code' ).get( code );
+  }
+
+  public byName ( name: USState[ 'name' ] ) : USState | undefined {
+    return this.get( 'name' ).get( name );
+  }
+
+  public byFips ( fips: USState[ 'fips' ] ) : USState | undefined {
+    return this.get( 'fips' ).get( fips );
+  }
 }
 
 export const lookup = new Lookup( states );
