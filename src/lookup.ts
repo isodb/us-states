@@ -17,19 +17,25 @@ export class Lookup {
     return new Map( this.states.map( state => [ state[ key ], state ] ) );
   }
 
-  public find ( by: 'code' | 'name' | 'fips', key: string ) : USState | undefined {}
-
-  public byCode ( code: string ) : USState | undefined {}
-
-  public byName ( name: string ) : USState | undefined {}
-
-  public byFips ( fips: string ) : USState | undefined {}
-
   public all () : ReadonlyArray< USState > {
     return this.states;
   }
 
   public filter () : ReadonlyArray< USState > {}
+
+  public find ( by: 'code' | 'name' | 'fips', key: string ) : USState | undefined {}
+
+  public byCode ( code: string ) : USState | undefined {
+    return this.find( 'code', code );
+  }
+
+  public byName ( name: string ) : USState | undefined {
+    return this.find( 'name', name );
+  }
+
+  public byFips ( fips: string ) : USState | undefined {
+    return this.find( 'fips', fips );
+  }
 }
 
 export const lookup = new Lookup();
