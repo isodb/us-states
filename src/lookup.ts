@@ -1,14 +1,11 @@
 import { states } from './data/us-states';
 import type { USState } from './types';
 
-type S = typeof states;
-type T = S[ number ];
-
 export class Lookup {
   private readonly index = states;
-  private readonly codeIndex: ReadonlyMap< T[ 'code' ], USState >;
-  private readonly nameIndex: ReadonlyMap< T[ 'name' ], USState >;
-  private readonly fipsIndex: ReadonlyMap< T[ 'fips' ], USState >;
+  private readonly codeIndex: ReadonlyMap< string, USState >;
+  private readonly nameIndex: ReadonlyMap< string, USState >;
+  private readonly fipsIndex: ReadonlyMap< string, USState >;
 
   constructor () {
     this.codeIndex = this.createIndex( 'code' );
@@ -16,30 +13,35 @@ export class Lookup {
     this.fipsIndex = this.createIndex( 'fips' );
   }
 
-  private createIndex < K extends keyof USState > ( key: K ) : ReadonlyMap< T[ K ], USState > {
+  private createIndex < K extends keyof USState > ( key: K ) : ReadonlyMap< USState[ K ], USState > {
     return new Map( this.index.map( state => [ state[ key ], state ] ) );
   }
 
-  public get states () : S {
+  public get states () : typeof states {
     return this.index;
   }
 
-  public get codes () : ReadonlyArray< T[ 'code' ] > {
+  public get codes () : ReadonlyArray< string > {
     return [ ...this.codeIndex.keys() ];
   }
 
-  public get names () : ReadonlyArray< T[ 'name' ] > {
+  public get names () : ReadonlyArray< string > {
     return [ ...this.nameIndex.keys() ];
   }
 
-  public get fips () : ReadonlyArray< T[ 'fips' ] > {
+  public get fips () : ReadonlyArray< string > {
     return [ ...this.fipsIndex.keys() ];
   }
 
   public filter () : ReadonlyArray< USState > {}
 
   public find ( by: 'code' | 'name' | 'fips', key: string ) : USState | undefined {
-    return this.states.find( state => state[ by ].toLowerCase() === key.toLowerCase() );
+    return (
+      by === 'code' ? this.codeIndex.get( key ) :
+      by === 'name' ? this.nameIndex.get( key ) :
+      by === 'fips' ? this.fipsIndex.get( key ) :
+      undefined
+    );
   }
 
   public byCode ( code: string ) : USState | undefined {
