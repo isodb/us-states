@@ -15,12 +15,16 @@ export class Lookup {
     this.states = states;
   }
 
-  private get < K extends 'code' | 'name' | 'fips' > ( key: K ) : ReadonlyMap< USState[ K ], USState > {
+  private get < K extends keyof Indexes > ( key: K ) : ReadonlyMap< USState[ K ], USState > {
     return this.indexes[ key ] ??= new Map( this.states.map( state => [ state[ key ], state ] ) );
   }
 
   public filter ( predicate: ( state: USState ) => boolean ) : ReadonlyArray< USState > {
     return this.states.filter( predicate );
+  }
+
+  public find < K extends keyof Indexes > ( by: K, key: USState[ K ] ) : USState | undefined {
+    return this.get( by ).get( key );
   }
 
   public byCode ( code: USState[ 'code' ] ) : USState | undefined {
