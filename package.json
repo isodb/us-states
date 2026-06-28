@@ -37,5 +37,8 @@
   "sideEffects": false,
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "typescript": "^6.0.3"
   }
 }
