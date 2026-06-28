@@ -1,3 +1,5 @@
+export type * from './types';
+
 import { states } from './data/us-states';
 
 const usStates = Object.freeze( { states } );

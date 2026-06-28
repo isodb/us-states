@@ -448,4 +448,4 @@ export const states = [ {
   division: 'Caribbean',
   fips: '78',
   type: 'territory'
-} ] as const satisfies USState[];
+} ] as const satisfies ReadonlyArray< USState >;
