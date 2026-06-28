@@ -1,5 +1,6 @@
 /**
- * U.S. states, the District of Columbia, and permanently inhabited U.S. territories.
+ * U.S. states, the District of Columbia, and permanently
+ * inhabited U.S. territories.
  */
 
 import type { USState } from '../types';
