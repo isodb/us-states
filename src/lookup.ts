@@ -4,9 +4,9 @@ import type { USState } from './types';
 export class Lookup {
   private readonly states: ReadonlyArray< USState >;
   private readonly indexes = {
-    code: this.createIndex( 'code' ),
-    name: this.createIndex( 'name' ),
-    fips: this.createIndex( 'fips' )
+    code,
+    name,
+    fips
   } as const;
 
   constructor ( states: ReadonlyArray< USState > ) {
@@ -15,6 +15,10 @@ export class Lookup {
 
   private createIndex < K extends keyof USState > ( key: K ) : ReadonlyMap< USState[ K ], USState > {
     return new Map( this.states.map( state => [ state[ key ], state ] ) );
+  }
+
+  private get < K extends 'code' | 'name' | 'fips' > ( key: K ) : ReadonlyMap< USState[ K ], USState > {
+    return this.indexes[ key ] ??= new Map( this.states.map( state => [ state[ key ], state ] ) );
   }
 
   public filter ( predicate: ( state: USState ) => boolean ) : ReadonlyArray< USState > {
