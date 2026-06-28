@@ -4,6 +4,8 @@ Typed reference data for U.S. states, the District of Columbia, and U.S. territo
 
 Provides immutable datasets and convenient lookup utilities for common state identifiers such as USPS codes, names, and FIPS codes.
 
+Part of the **[isodb](https://github.com/isodb)** project, providing typed reference datasets for developers.
+
 ## Features
 
 - Includes all 50 U.S. states
