@@ -1,20 +1,16 @@
 import { states } from './data/us-states';
-import type { USState } from './types';
-
-type Code = USState[ 'code' ];
-type Name = USState[ 'name' ];
-type Fips = USState[ 'fips' ];
+import type { Code, FIPS, Name, USState } from './types';
 
 type Indexes = {
   code?: ReadonlyMap< Code, USState >;
   name?: ReadonlyMap< Name, USState >;
-  fips?: ReadonlyMap< Fips, USState >;
+  fips?: ReadonlyMap< FIPS, USState >;
 };
 
 type Keys = {
-  codes?: ReadonlyArray< Code >;
-  names?: ReadonlyArray< Name >;
-  fips?: ReadonlyArray< Fips >;
+  code?: ReadonlyArray< Code >;
+  name?: ReadonlyArray< Name >;
+  fips?: ReadonlyArray< FIPS >;
 };
 
 export class Lookup {
@@ -31,14 +27,14 @@ export class Lookup {
   }
 
   public get codes () : ReadonlyArray< Code > {
-    return this.keys.codes ??= [ ...this.index( 'code' ).keys() ]; 
+    return this.keys.code ??= [ ...this.index( 'code' ).keys() ]; 
   }
 
   public get names () : ReadonlyArray< Name > {
-    return this.keys.names ??= [ ...this.index( 'name' ).keys() ]; 
+    return this.keys.name ??= [ ...this.index( 'name' ).keys() ]; 
   }
 
-  public get fips () : ReadonlyArray< Fips > {
+  public get fips () : ReadonlyArray< FIPS > {
     return this.keys.fips ??= [ ...this.index( 'fips' ).keys() ]; 
   }
 
@@ -58,7 +54,7 @@ export class Lookup {
     return this.index( 'name' ).get( name );
   }
 
-  public byFips ( fips: Fips ) : USState | undefined {
+  public byFips ( fips: FIPS ) : USState | undefined {
     return this.index( 'fips' ).get( fips );
   }
 }
