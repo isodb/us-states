@@ -32,12 +32,44 @@ export type Division =
   | 'Oceania'
   | 'Caribbean';
 
+/**
+ * Represents a U.S. state, the District of Columbia, or a U.S. territory.
+ */
 export interface USState {
+
+  /**
+   * USPS postal abbreviation (e.g. "CA").
+   */
   code: string;
+
+  /**
+   * Official English name.
+   */
   name: string;
+
+  /**
+   * Capital city.
+   */
   capital: string;
+
+  /**
+   * U.S. Census region.
+   */
   region: Region;
+
+  /**
+   * U.S. Census division or geographic subdivision.
+   */
   division: Division;
+
+  /**
+   * Federal Information Processing Standard (FIPS) code.
+   */
   fips: string;
+
+  /**
+   * Administrative type.
+   */
   type: Type;
+
 }
