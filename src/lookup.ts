@@ -33,7 +33,9 @@ export class Lookup {
     return [ ...this.fipsIndex.keys() ];
   }
 
-  public filter () : ReadonlyArray< USState > {}
+  public filter ( predicate: ( def: USState ) => boolean ) : ReadonlyArray< USState > {
+    return this.states.filter( predicate );
+  }
 
   public find ( by: 'code' | 'name' | 'fips', key: string ) : USState | undefined {
     return (
