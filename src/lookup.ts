@@ -1,11 +1,14 @@
 import { states } from './data/us-states';
 import type { USState } from './types';
 
+type S = typeof states;
+type T = S[ number ];
+
 export class Lookup {
-  private readonly states = states;
-  private readonly codeIndex: ReadonlyMap< string, USState >;
-  private readonly nameIndex: ReadonlyMap< string, USState >;
-  private readonly fipsIndex: ReadonlyMap< string, USState >;
+  private readonly index = states;
+  private readonly codeIndex: ReadonlyMap< T[ 'code' ], USState >;
+  private readonly nameIndex: ReadonlyMap< T[ 'name' ], USState >;
+  private readonly fipsIndex: ReadonlyMap< T[ 'fips' ], USState >;
 
   constructor () {
     this.codeIndex = this.createIndex( 'code' );
@@ -13,12 +16,24 @@ export class Lookup {
     this.fipsIndex = this.createIndex( 'fips' );
   }
 
-  private createIndex < K extends keyof USState > ( key: K ) : ReadonlyMap< USState[ K ], USState > {
-    return new Map( this.states.map( state => [ state[ key ], state ] ) );
+  private createIndex < K extends keyof USState > ( key: K ) : ReadonlyMap< T[ K ], USState > {
+    return new Map( this.index.map( state => [ state[ key ], state ] ) );
   }
 
-  public all () : ReadonlyArray< USState > {
-    return this.states;
+  public get states () : S {
+    return this.index;
+  }
+
+  public get codes () : ReadonlyArray< T[ 'code' ] > {
+    return [ ...this.codeIndex.keys() ];
+  }
+
+  public get names () : ReadonlyArray< T[ 'name' ] > {
+    return [ ...this.nameIndex.keys() ];
+  }
+
+  public get fips () : ReadonlyArray< T[ 'fips' ] > {
+    return [ ...this.fipsIndex.keys() ];
   }
 
   public filter () : ReadonlyArray< USState > {}
