@@ -7,16 +7,35 @@ type Indexes = {
   fips?: ReadonlyMap< USState[ 'fips' ], USState >;
 };
 
+type Keys = {
+  codes?: ReadonlyArray< USState[ 'code' ] >;
+  names?: ReadonlyArray< USState[ 'name' ] >;
+  fips?: ReadonlyArray< USState[ 'fips' ] >;
+};
+
 export class Lookup {
   private readonly states: ReadonlyArray< USState >;
   private readonly indexes: Indexes = {};
+  private readonly keys: Keys = {};
 
   constructor ( states: ReadonlyArray< USState > ) {
     this.states = states;
   }
 
-  private get < K extends keyof Indexes > ( key: K ) : ReadonlyMap< USState[ K ], USState > {
+  private index < K extends keyof Indexes > ( key: K ) : ReadonlyMap< USState[ K ], USState > {
     return this.indexes[ key ] ??= new Map( this.states.map( state => [ state[ key ], state ] ) );
+  }
+
+  public get codes () : ReadonlyArray< USState[ 'code' ] > {
+    return this.keys.codes ??= [ ...this.index( 'code' ).keys() ]; 
+  }
+
+  public get names () : ReadonlyArray< USState[ 'name' ] > {
+    return this.keys.names ??= [ ...this.index( 'name' ).keys() ]; 
+  }
+
+  public get fips () : ReadonlyArray< USState[ 'fips' ] > {
+    return this.keys.fips ??= [ ...this.index( 'fips' ).keys() ]; 
   }
 
   public filter ( predicate: ( state: USState ) => boolean ) : ReadonlyArray< USState > {
@@ -24,19 +43,19 @@ export class Lookup {
   }
 
   public find < K extends keyof Indexes > ( by: K, key: USState[ K ] ) : USState | undefined {
-    return this.get( by ).get( key );
+    return this.index( by ).get( key );
   }
 
   public byCode ( code: USState[ 'code' ] ) : USState | undefined {
-    return this.get( 'code' ).get( code );
+    return this.index( 'code' ).get( code );
   }
 
   public byName ( name: USState[ 'name' ] ) : USState | undefined {
-    return this.get( 'name' ).get( name );
+    return this.index( 'name' ).get( name );
   }
 
   public byFips ( fips: USState[ 'fips' ] ) : USState | undefined {
-    return this.get( 'fips' ).get( fips );
+    return this.index( 'fips' ).get( fips );
   }
 }
 
