@@ -4,9 +4,9 @@ import type { USState } from './types';
 export class Lookup {
   private readonly states: ReadonlyArray< USState >;
   private readonly indexes = {
-    code,
-    name,
-    fips
+    code: [],
+    name: [],
+    fips: []
   } as const;
 
   constructor ( states: ReadonlyArray< USState > ) {
