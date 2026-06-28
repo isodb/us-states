@@ -1,6 +1,8 @@
+import { states } from './data/us-states';
+import { lookup } from './lookup';
+
 export type * from './types';
 
-import { states } from './data/us-states';
-import { Lookup, lookup } from './lookup';
+export const usStates = { lookup, states };
 
-export { Lookup, lookup, states };
+export default usStates;
