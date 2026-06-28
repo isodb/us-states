@@ -1,8 +1,7 @@
 export type * from './types';
 
 import { states } from './data/us-states';
+import { Lookup, lookup } from './lookup';
 
-const usStates = Object.freeze( { states } );
+export { Lookup, lookup, states };
 
-export { states, usStates };
-export default usStates;
