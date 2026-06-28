@@ -2,15 +2,24 @@ import { states } from './data/us-states';
 import type { USState } from './types';
 
 export class Lookup {
+  private readonly states: ReadonlyArray< USState >;
   private readonly indexes = {
     code: this.createIndex( 'code' ),
     name: this.createIndex( 'name' ),
     fips: this.createIndex( 'fips' )
   } as const;
 
+  constructor ( states: ReadonlyArray< USState > ) {
+    this.states = states;
+  }
+
   private createIndex < K extends keyof USState > ( key: K ) : ReadonlyMap< USState[ K ], USState > {
-    return new Map( states.map( state => [ state[ key ], state ] ) );
+    return new Map( this.states.map( state => [ state[ key ], state ] ) );
+  }
+
+  public filter ( predicate: ( state: USState ) => boolean ) : ReadonlyArray< USState > {
+    return this.states.filter( predicate );
   }
 }
 
-export const lookup = new Lookup();
+export const lookup = new Lookup( states );
