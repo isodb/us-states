@@ -1,28 +1,39 @@
+/**
+ * Lookup class for U.S. states, the District of Columbia, and U.S. territories.
+ */
+
 import { states } from './data/us-states';
 import type { Code, FIPS, Name, USState } from './types';
 
-type Indexes = {
+type LookupIndexes = {
   code?: ReadonlyMap< Code, USState >;
   name?: ReadonlyMap< Name, USState >;
   fips?: ReadonlyMap< FIPS, USState >;
 };
 
-type Keys = {
+type LookupKeys = {
   code?: ReadonlyArray< Code >;
   name?: ReadonlyArray< Name >;
   fips?: ReadonlyArray< FIPS >;
 };
 
+/**
+ * Provides lookup and filtering utilities for U.S. states,
+ * the District of Columbia, and U.S. territories.
+ * 
+ * Lookup indexes are created lazily on first access and
+ * cached for subsequent queries.
+ */
 export class Lookup {
   private readonly states: ReadonlyArray< USState >;
-  private readonly indexes: Indexes = {};
-  private readonly keys: Keys = {};
+  private readonly indexes: LookupIndexes = {};
+  private readonly keys: LookupKeys = {};
 
   constructor ( states: ReadonlyArray< USState > ) {
     this.states = states;
   }
 
-  private index < K extends keyof Indexes > ( key: K ) : ReadonlyMap< USState[ K ], USState > {
+  private index < K extends keyof LookupIndexes > ( key: K ) : ReadonlyMap< USState[ K ], USState > {
     return this.indexes[ key ] ??= new Map( this.states.map( state => [ state[ key ], state ] ) );
   }
 
@@ -42,7 +53,7 @@ export class Lookup {
     return this.states.filter( predicate );
   }
 
-  public find < K extends keyof Indexes > ( by: K, key: USState[ K ] ) : USState | undefined {
+  public find < K extends keyof LookupIndexes > ( by: K, key: USState[ K ] ) : USState | undefined {
     return this.index( by ).get( key );
   }
 
