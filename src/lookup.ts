@@ -106,7 +106,7 @@ export class Lookup {
    * @param fips Federal Information Processing Standard (FIPS) code.
    * @returns The matching state, or `undefined` if not found.
    */
-  public byFips ( fips: FIPS ) : USState | undefined {
+  public byFIPS ( fips: FIPS ) : USState | undefined {
     return this.index( 'fips' ).get( fips );
   }
 }
