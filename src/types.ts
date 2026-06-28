@@ -32,8 +32,19 @@ export type Division =
   | 'Oceania'
   | 'Caribbean';
 
+/**
+ * USPS postal abbreviation (e.g. "CA").
+ */
 export type Code = string;
+
+/**
+ * Official English name.
+ */
 export type Name = string;
+
+/**
+ * Federal Information Processing Standard (FIPS) code.
+ */
 export type FIPS = string;
 
 /**
