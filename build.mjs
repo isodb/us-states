@@ -12,9 +12,9 @@ const common = {
   platform: 'neutral',
   target: 'esnext',
   sourcemap: false,
+  legalComments: 'none',
   minify: false,
-  treeShaking: true,
-  legalComments: 'none'
+  treeShaking: true
 };
 
 await Promise.all( [
