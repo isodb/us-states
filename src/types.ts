@@ -51,40 +51,18 @@ export type FIPS = string;
  * Represents a U.S. state, the District of Columbia, or a U.S. territory.
  */
 export interface USState {
-
-  /**
-   * USPS postal abbreviation (e.g. "CA").
-   */
+  /** USPS postal abbreviation (e.g. "CA"). */
   code: Code;
-
-  /**
-   * Official English name.
-   */
+  /** Official English name. */
   name: Name;
-
-  /**
-   * Capital city.
-   */
+  /** Capital city. */
   capital: string;
-
-  /**
-   * U.S. Census region.
-   */
+  /** U.S. Census region. */
   region: Region;
-
-  /**
-   * U.S. Census division or geographic subdivision.
-   */
+  /** U.S. Census division or geographic subdivision. */
   division: Division;
-
-  /**
-   * Federal Information Processing Standard (FIPS) code.
-   */
+  /** Federal Information Processing Standard (FIPS) code. */
   fips: FIPS;
-
-  /**
-   * Administrative type.
-   */
+  /** Administrative type. */
   type: Type;
-
 }
