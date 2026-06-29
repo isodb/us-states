@@ -38,10 +38,14 @@
   "engines": {
     "node": ">=18"
   },
+  "scripts": {
+    "build": "node build.mjs && tsc -p tsconfig.build.json && tsc-alias"
+  },
   "dependencies": {
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "esbuild": "^0.28.1"
+    "esbuild": "^0.28.1",
+    "tsc-alias": "^1.8.17"
   }
 }
