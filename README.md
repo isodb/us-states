@@ -29,45 +29,45 @@ npm install @isodb/us-states
 
 ```ts
 import { states } from '@isodb/us-states';
-
 console.log( states.length );
-// 56
 ```
 
 ### Lookup by USPS code
+
+Finds a state by its USPS postal abbreviation:
 
 ```ts
 import { byCode } from '@isodb/us-states';
 
 const california = byCode( 'CA' );
 console.log( california?.capital );
-// Sacramento
 ```
 
 ### Lookup by name
 
+Finds a state by its official English name:
+
 ```ts
 import { byName } from '@isodb/us-states';
-
 const texas = byName( 'Texas' );
 ```
 
 ### Lookup by FIPS code
 
+Finds a state by its FIPS code:
+
 ```ts
 import { byFIPS } from '@isodb/us-states';
-
 const alaska = byFIPS( '02' );
 ```
 
 ### Filter the dataset
 
+Filters states using the specified predicate:
+
 ```ts
 import { filter } from '@isodb/us-states';
-
-const westernStates = filter(
-  state => state.region === 'West'
-);
+const westernStates = filter( state => state.region === 'West' );
 ```
 
 ### Using the lookup service
@@ -87,10 +87,10 @@ lookup.fips;
 ### Default export
 
 ```ts
-import USStates from '@isodb/us-states';
+import usStates from '@isodb/us-states';
 
-USStates.byCode( 'NY' );
-USStates.states;
+usStates.byCode( 'NY' );
+usStates.states;
 ```
 
 ## Dataset
