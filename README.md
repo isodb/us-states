@@ -28,8 +28,8 @@ npm install @isodb/us-states
 ### Import the dataset
 
 ```ts
-import { states } from '@isodb/us-states';
-console.log( states.length );
+import { data } from '@isodb/us-states';
+console.log( data.length );
 ```
 
 ### Lookup by USPS code
