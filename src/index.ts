@@ -13,6 +13,7 @@
 
 import { states as data } from './data/us-states';
 import { lookup } from './lookup';
+import type { USState } from './types';
 
 export type * from './types';
 export { data, lookup };
@@ -40,5 +41,9 @@ export const filter = lookup.filter.bind( lookup );
 /**
  * Complete package API.
  */
-export const usStates = { states: data, lookup, byCode, byName, byFIPS, filter };
+export const usStates = {
+  states: data as ReadonlyArray< USState >, lookup,
+  byCode, byName, byFIPS, filter
+};
+
 export default usStates;
