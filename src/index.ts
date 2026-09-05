@@ -11,11 +11,11 @@
  * @license MIT
  */
 
-import { states } from './data/us-states';
+import { states as data } from './data/us-states';
 import { lookup } from './lookup';
 
 export type * from './types';
-export { states, lookup };
+export { data, lookup };
 
 /**
  * Finds a state by its USPS postal abbreviation.
@@ -40,5 +40,5 @@ export const filter = lookup.filter.bind( lookup );
 /**
  * Complete package API.
  */
-export const usStates = { states, lookup, byCode, byName, byFIPS, filter };
+export const usStates = { states: data, lookup, byCode, byName, byFIPS, filter };
 export default usStates;
